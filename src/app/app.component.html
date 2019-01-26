@@ -1,9 +1,9 @@
-<app-header></app-header>
+<app-header (tabChangeEmiter)="choiceTab($event)"></app-header>
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <app-recipes></app-recipes>
-      <app-shopping-list></app-shopping-list>
+    <div class="col-xs-12">
+      <app-recipes *ngIf="actualTab == 'recipes' || actualTab == 'mainMenu'"></app-recipes>
+      <app-shopping-list *ngIf="actualTab == 'shoppingList' || actualTab == 'mainMenu'"></app-shopping-list>
     </div>
   </div>
 </div>
