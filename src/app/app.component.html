@@ -2,8 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <app-recipes *ngIf="actualTab == 'recipes' || actualTab == 'mainMenu'"></app-recipes>
-      <app-shopping-list *ngIf="actualTab == 'shoppingList' || actualTab == 'mainMenu'"></app-shopping-list>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
