@@ -7,7 +7,7 @@ import {RecipeDetailComponent} from './recipe-detail/recipe-detail.component';
 import {RouterModule} from '@angular/router';
 
 const recipesRoutes = [
-  {path: 'recipes', component: RecipesComponent, children: [
+  {path: '', component: RecipesComponent, children: [
       { path: '', component: RecipeStartComponent},
       { path: 'new', component: RecipeEditComponent, canActivate: [GuardService] },
       { path: ':id', component: RecipeDetailComponent},
