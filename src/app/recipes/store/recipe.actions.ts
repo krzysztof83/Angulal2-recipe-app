@@ -32,7 +32,7 @@ export class DeleteRecipe implements Action {
   constructor(public payload: number) {}
 }
 
-export class StoreRecipe implements Action {
+export class StoreRecipes implements Action {
   readonly type = STORE_RECIPES;
 }
 
@@ -40,4 +40,4 @@ export class FetchRecipe implements Action {
   readonly type = FETCH_RECIPES;
 }
 
-export type RecipeActions = SetRecipes | AddRecipe | UpdateRecipe | DeleteRecipe | StoreRecipe | FetchRecipe;
+export type RecipeActions = SetRecipes | AddRecipe | UpdateRecipe | DeleteRecipe | StoreRecipes | FetchRecipe;
