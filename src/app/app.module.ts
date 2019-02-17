@@ -6,7 +6,6 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RecipeService} from './recipes/recipe.service';
 import {DataStorageService} from './shared/data-storage.service';
-import {AuthService} from './auth/auth.service';
 import {GuardService} from './auth/guard.service';
 import {SharedModule} from './shared/shared.module';
 import {ShoppingListModule} from './shopping-list/shopping-list.module';
@@ -36,7 +35,6 @@ import {AuthEffects} from './auth/store/auth.effects';
   providers: [
     RecipeService,
     DataStorageService,
-    AuthService,
     GuardService
   ],
   bootstrap: [AppComponent]
