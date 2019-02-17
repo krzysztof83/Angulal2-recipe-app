@@ -4,8 +4,6 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {RecipeService} from './recipes/recipe.service';
-import {DataStorageService} from './shared/data-storage.service';
 import {GuardService} from './auth/guard.service';
 import {SharedModule} from './shared/shared.module';
 import {ShoppingListModule} from './shopping-list/shopping-list.module';
@@ -39,8 +37,6 @@ import {environment} from '../environments/environment';
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
-    RecipeService,
-    DataStorageService,
     GuardService
   ],
   bootstrap: [AppComponent]
