@@ -1,11 +1,8 @@
 import {Effect, Actions, ofType} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/do';
-import {fromPromise} from 'rxjs/observable/fromPromise';
+import {map, switchMap, mergeMap, tap} from 'rxjs/operators';
+import {from} from 'rxjs';
 import * as AuthActions from './auth.actions';
 import * as firebase from 'firebase';
 
@@ -14,16 +11,16 @@ export class AuthEffects {
   @Effect()
   authSingup = this.actions$.pipe(
     ofType(AuthActions.TRY_SIGNUP))
-    .map((action: AuthActions.TrySingup) => {
+    .pipe(map((action: AuthActions.TrySingup) => {
       return action.payload;
-    })
-    .switchMap((authData: { username: string, password: string }) => {
-      return fromPromise(firebase.auth().createUserWithEmailAndPassword(authData.username, authData.password));
-    })
-    .switchMap(() => {
-      return fromPromise(firebase.auth().currentUser.getIdToken());
-    })
-    .mergeMap((token: string) => {
+    }),
+    switchMap((authData: { username: string, password: string }) => {
+      return from(firebase.auth().createUserWithEmailAndPassword(authData.username, authData.password));
+    }),
+    switchMap(() => {
+      return from(firebase.auth().currentUser.getIdToken());
+    }),
+    mergeMap((token: string) => {
       return [
         {
           type: AuthActions.SIGNUP
@@ -33,21 +30,21 @@ export class AuthEffects {
           payload: token
         }
       ];
-    });
+    }));
 
   @Effect()
   authSingin = this.actions$.pipe(
     ofType(AuthActions.TRY_SIGNIN))
-    .map((action: AuthActions.TrySingin) => {
+    .pipe(map((action: AuthActions.TrySingin) => {
       return action.payload;
-    })
-    .switchMap((authData: { username: string, password: string }) => {
-      return fromPromise(firebase.auth().signInWithEmailAndPassword(authData.username, authData.password));
-    })
-    .switchMap(() => {
-      return fromPromise(firebase.auth().currentUser.getIdToken());
-    })
-    .mergeMap((token: string) => {
+    }),
+    switchMap((authData: { username: string, password: string }) => {
+      return from(firebase.auth().signInWithEmailAndPassword(authData.username, authData.password));
+    }),
+    switchMap(() => {
+      return from(firebase.auth().currentUser.getIdToken());
+    }),
+    mergeMap((token: string) => {
       this.router.navigate(['/']);
       return [
         {
@@ -58,14 +55,14 @@ export class AuthEffects {
           payload: token
         }
       ];
-    });
+    }));
 
   @Effect({dispatch: false})
   authLogout = this.actions$.pipe(
     ofType(AuthActions.LOGOUT))
-    .do(() => {
+    .pipe(tap(() => {
       this.router.navigate(['/']);
-    });
+    }));
 
   constructor(private actions$: Actions, private router: Router) {
   }
